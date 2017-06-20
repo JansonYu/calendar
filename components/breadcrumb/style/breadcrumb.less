@@ -1,0 +1,43 @@
+.breadcrumb {
+    color: #999;
+    font-size: 14px;
+
+    a {
+        color: #999;
+        font-size: 14px;
+        text-decoration: none;
+
+        &:hover {
+            color: #666;
+        }
+    }
+}
+
+.breadcrumb--default {
+    color: #999;
+    font-size: 14px;
+}
+
+.breadcrumb--item {
+    &:hover .breadcrumb--link {
+        cursor: pointer;
+        color: #666;
+    }
+
+    &:last-child .breadcrumb--link {
+        color: #333;
+
+        &:hover {
+            cursor: default;
+            color: #333;
+        }
+    }
+}
+
+.breadcrumb--link {
+    margin-right: 5px;
+}
+
+.breadcrumb--separator {
+    margin-right: 5px;
+}

@@ -1,0 +1,12 @@
+{
+    "extends": "stylelint-config-primer",
+    "rules": {
+        "indentation": 4,
+        "declaration-block-properties-order": null,
+        "rule-nested-empty-line-before": null,
+        "selector-no-type": [true,
+            "ignore": ["compounded", "descendant"]
+        ]
+
+    }
+}

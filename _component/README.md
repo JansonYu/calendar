@@ -1,0 +1,1 @@
+# <%= component_upper %> 组件
