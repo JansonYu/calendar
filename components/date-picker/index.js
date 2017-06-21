@@ -1,9 +1,16 @@
 import React from 'react'
 import RcCalendar from 'rc-calendar'
-import createPicker from './createPicker'
+import MonthCalendar from 'rc-calendar/lib/MonthCalendar'
+import CreatePicker from './createPicker'
 
-function DatePick() {
-    return <div>{ createPicker(RcCalendar) }</div>
+function DatePicker() {
+    const Calendar = CreatePicker(RcCalendar)
+    return <div><Calendar /></div>
 }
 
-export default DatePick
+function MonthPicker() {
+    const Calendar = CreatePicker(MonthCalendar)
+    return <div><Calendar /></div>
+}
+
+export { DatePicker, MonthPicker }

@@ -1,50 +1,51 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-
+import 'rc-calendar/assets/index.css'
 import RcDatePicker from 'rc-calendar/lib/Picker'
 import MonthCalendar from 'rc-calendar/lib/MonthCalendar'
+import zhCN from 'rc-calendar/lib/locale/zh_CN'
 import moment from 'moment'
+import Input from '../input/index'
 
 const prefix = 'date-picker'
+const inputPrefix = 'date-picker-input'
 
-function createPicker(TheCalendar) {
+export default function CreatePicker(TheCalendar) {
     return class CalenderWrapper extends React.Component {
         static defaultProps = {
-            allowClear: true,
-            showToday: true,
+            // showToday: true,
             value: moment(),
             defaultValue: moment(),
             placeholder: '请选择日期',
-            format: 'YYYY-MM-DD HH:mm:ss',
+            format: 'YYYY-MM-DD',
+            size: 'default',
             renderExtraFooter: null,
             onChange: () => {},
-            onOk: () => {},
+            // onOk: () => {},
             showTime: false,
             disabled: false,
             disabledDate: () => {},
             disabledTime: () => {},
-            inputClassName: '',
             className: '',
             style: {},
         }
         static propTypes = {
-            allowClear: PropTypes.bool,
-            showToday: PropTypes.bool,
+            // showToday: PropTypes.bool,
             value: PropTypes.date,
             defaultValue: PropTypes.date,
             placeholder: PropTypes.string,
             format: PropTypes.string,
+            size: PropTypes.oneOf(['large', 'small', 'default']),
             renderExtraFooter: PropTypes.node,
             onChange: PropTypes.func,
-            onOk: PropTypes.func,
+            // onOk: PropTypes.func,
             showTime: PropTypes.bool,
             disabled: PropTypes.bool,
             disabledDate: PropTypes.func,
             disabledTime: PropTypes.func,
-            inputClassName: PropTypes.string,
             className: PropTypes.string,
-            style: PropTypes.fun,
+            style: PropTypes.shape,
         }
         constructor(props) {
             super(props)
@@ -84,18 +85,16 @@ function createPicker(TheCalendar) {
         render() {
             const { value } = this.state
             const {
-                allowClear,
                 defaultValue,
                 placeholder,
-                onOk,
+                // onOk,
                 format,
-                showToday,
+                // showToday,
                 showTime,
                 disabledDate,
                 style,
                 disabled,
                 className,
-                inputClassName,
             } = this.props
             const disabledTime = this.props.showTime ? this.props.disabledTime : null
             const calendarClassName = classNames({
@@ -109,28 +108,29 @@ function createPicker(TheCalendar) {
                         disabledTime={disabledTime}
                         defaultValue={defaultValue}
                         dateInputPlaceholder={placeholder}
-                        showOk={!!onOk}
-                        onOk={onOk}
+                        showOk={false}
                         format={format}
-                        showToday={showToday}
+                        locale={zhCN}
+                        showToday={false}
                         className={calendarClassName}
                         renderFooter={this.renderFooter}
                     />
                 </span>
             )
-            const clearIcon = (!disabled && allowClear && value) ? (
-                <span className={`${prefix}-picker-clear`} onClick={this.clearSelection} />
-            ) : null
+            const inputClassName = classNames({
+                [inputPrefix]: true,
+                [`${inputPrefix}-lg`]: this.props.size === 'large',
+                [`${inputPrefix}-sm`]: this.props.size === 'small',
+            })
             const input = ({ value: inputValue }) => (
                 <div>
-                    <input
+                    <Input
                         readOnly={true}
                         disabled={disabled}
                         className={inputClassName}
                         placeholder={placeholder}
                         value={(inputValue && inputValue.format(this.props.format)) || ''}
                     />
-                    {clearIcon}
                     <span className={`${prefix}-picker-icon`} />
                 </div>
             )
@@ -149,5 +149,3 @@ function createPicker(TheCalendar) {
         }
     }
 }
-
-export default createPicker

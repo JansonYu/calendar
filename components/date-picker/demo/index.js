@@ -4,16 +4,22 @@ import ReactDom from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import styles from './index.less'
 
-import DatePicker from '../index'
+import { DatePicker, MonthPicker } from '../index'
 
 const Page = () => (
     <div className={styles['demo-box']}>
-        <h1 className={styles['demo-name']}>此处填写demo名称</h1>
+        <h1 className={styles['demo-name']}>DatePick组件</h1>
         <div className={styles['demo-item-title']}>
-            此处填写demo分类
+            默认
         </div>
         <div className={styles['demo-item-content']}>
             <DatePicker />
+        </div>
+        <div className={styles['demo-item-title']}>
+            月视图
+        </div>
+        <div className={styles['demo-item-content']}>
+            <MonthPicker />
         </div>
     </div>
 )
